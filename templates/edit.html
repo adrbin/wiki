@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %} {{ title }} {% endblock %}
+{% block nav %}
+<li class="nav-header">Nawigacja strony</li>
+<li><a href= "/wiki/{{ url }}">Strona</a></li>
+<li class="active"><a href= "/wiki/{{ url }}/edit">Edytuj</a></li>
+<li><a href= "/wiki/{{ url }}/history">Historia</a></li>
+{% endblock %}
+{% block content %}
+<div class="well row">
+	<div class="span7 offset1">
+		{% if errors %}
+		<div class="error">
+		{% for error in errors %}
+		  <p class="text-error">{{ error }}</p>
+		{% endfor %}
+		</div>
+		{% endif %}
+	    <h1>{{ title }}</h1>
+		<div class="wiki-text">
+			<form class="wiki-form" method="post">
+				<textarea id="text" name="text">{{ text }}</textarea>
+				<!-- <label for="tags" class="lbl-tags"><h4>Tags</h4></label> -->
+				<input type="text" name="tags" id="tags" placeholder="Tags" value="{{ tags }}">
+				<p><input class="btn btn-primary btn-large" type="submit" value="Post"></p>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

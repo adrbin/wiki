@@ -1,0 +1,26 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends "base.html" %}
+{% block title %}Zaloguj się{% endblock %}
+{% block login %} active {% endblock %}"
+{% block content %}
+<div class="well row">
+	<div class="span4 offset1">
+	    <h1>Zaloguj się</h1>
+		<form class="login" method="post" action="/login">
+		  <dl>
+		  	{% if errors %}
+			<ul class="errors">
+			{% for error in errors %}
+			  <li>{{ error }}</li>
+			  {% endfor %}
+			</ul>
+			{% endif %}
+			{{ form.csrf_token }}
+			{{ render_field(form.username) }}
+			{{ render_field(form.password) }}
+		  </dl>
+		  <p><input class="btn btn-primary btn-large" type="submit" value="Zaloguj się">
+		</form>
+	</div>
+</div>
+{% endblock %}

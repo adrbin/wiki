@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %} {{ title }} {% endblock %}
+{% block content %}
+		  <h1 class="offset2"><a href="/tags/{{ url }}">{{ title }}</a></h1>
+		  {% if posts %}
+		    {% for post in posts %}
+		    <div class="well row">
+		    <div class="span7">
+		      <h3><a class="span2" href="/users/{{ post.user.name }}">{{ post.user.name }}</a>
+		      <a class="span3" href="/wiki/{{ post.page.url }}/{{ post.id }}">{{ post.page.url.capitalize() }}</a></h3>
+		      {{ post.pub_date.strftime("%A, %d %B %Y") }}
+		      <div class="span7">
+		      	<hr class="break">
+		      	<div class="wiki_text">
+		      		{{ post.text|convert_links|safe }}
+		      	</div>
+		      </div>
+		    </div>
+			</div>
+			{% endfor %}
+		  {% endif %}
+{% endblock %}

@@ -1,0 +1,39 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+
+.content {
+	margin-left: 50px;
+}
+
+textarea {
+	width: 500px;
+	height: 300px;
+}
+
+.break {
+	border: 0px solid black;
+}
+
+.light-break {
+	border: 1px dashed black;
+}
+
+.admin-name {
+	border-left: 1px solid #999999;
+}
+
+.btn-search {
+	margin-top: 10px;
+}
+
+/*.post {
+	border-top: 1px solid black;
+}*/
+
+/*.lbl-tags {
+	float: left;
+}*/

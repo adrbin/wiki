@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %} Wiki {% endblock %}
+{% block home %} active {% endblock %}
+{% block content %}
+          <h1 class="offset2"> Witaj na myWiki!</h1>
+          {% if pages %}
+            <p> Tutaj są niektóre z naszych najnowszych stron: </p>
+            {% for page in pages %}
+            <div class="row well">
+            <div class="span7">
+              <h3>
+              <a class="span3 offset2" href="/wiki/{{ page.url }}">{{ page.url.capitalize() }}</a></h3>
+              {{ page.posts[-1].pub_date.strftime("%A, %d %B %Y") }}
+              <div class="span7">
+                <hr class="break">
+                <div class="wiki_text">
+                    {{ page.posts[-1].text|convert_links|safe }}
+                </div>
+                {% if page.posts[-1].tags %}
+                <hr class="light-break">
+                <div class="tags">Tagi:
+                {% for tag in page.posts[-1].tags %}
+                  <a href="/tags/{{ tag.tag }}">{{ tag.tag }}</a>
+                {% endfor %}
+                </div>
+                {% endif %}
+              </div>
+            </div>
+                </div>
+            {% endfor %}
+            {% else %}
+            <p> Nie ma na razie żadnego artykułu. Możesz jakiś utworzyć! </p>
+          {% endif %}
+{% endblock %}

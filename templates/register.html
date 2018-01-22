@@ -1,0 +1,48 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends "base.html" %}
+{% block title %}Zarejestruj się{% endblock %}
+{% block register %} active {% endblock %}"
+{% block content %}
+<div class="well row">
+	<div class="span7 offset1">
+	    <h1>Zarejestruj się</h1>
+		<form class="register" method="post" action="/register">
+		  <dl>
+			{% if errors %}
+			<div class="error">
+			{% for error in errors %}
+			  <p class="text-error">{{ error }}</p>
+			{% endfor %}
+			</div>
+			{% endif %}
+			{{ form.csrf_token }}
+			{{ render_field(form.username) }}
+			{{ render_field(form.email) }}
+			{{ render_field(form.password) }}
+			{{ render_field(form.confirm) }}
+		  </dl>
+		  <p><input class="btn btn-primary btn-large" type="submit" value="Zarejestruj się">
+		</form>
+	</div>
+</div>
+{% endblock %}
+{% block myscript %}
+    <script type=text/javascript>
+        $(function() {
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+            $('input[name="username"]').bind('keyup paste', function() {
+                $.getJSON($SCRIPT_ROOT + '/_user_check', {
+                username: $('input[name="username"]').val(),
+                }, function(data) {
+                    if (data.result) {
+                        $("#user_check").remove();
+                        $('<div class="control-group error" id="user_check"><p class="error text-error">Nazwa użytkownika "' + data.username + '" jest zajęta</p></div>').insertAfter("#username");
+                    } else {
+                        $("#user_check").remove();
+                    }
+                });
+            return false;
+            });
+        });
+    </script>
+{% endblock %}"

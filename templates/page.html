@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %} {{ title }} {% endblock %}
+{% block nav %}
+<li class="nav-header">Nawigacja strony</li>
+<li class="active"><a href= "/wiki/{{ url }}">Strona</a></li>
+<li><a href= "/wiki/{{ url }}/edit">Edytuj</a></li>
+<li><a href= "/wiki/{{ url }}/history">Historia</a></li>{% endblock %}
+{% block content %}
+<div class="well row">
+	    <h2><a class="span4 offset1" href="#">{{ title }}</a>
+		</h2>
+		<div class="span7">
+		<hr class="break">
+		<div class="wiki_text">
+			{{ text|safe }}
+		</div>
+		{% if post.tags %}
+		<hr class="light-break"
+		<div class="tags">Tagi:
+		{% for tag in post.tags %}
+		  <a href="/tags/{{ tag.tag }}">{{ tag.tag }}</a>
+		{% endfor %}
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

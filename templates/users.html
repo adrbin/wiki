@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %} {{ urllib.unquote_plus(url).capitalize() }} {% endblock %}
+{% block user %}
+{% if g.user.id == user.id %}
+active
+{% endif %}
+{% endblock %}"
+{% block content %}
+		  <h1 class="offset2">
+		  	<a href="/users/{{ url }}"><img src="{{ user.email|gravatar(size=48) }}"></a>
+		  	<a href="/users/{{ url }}">{{ urllib.unquote_plus(url).capitalize() }}</a>
+		  </h1>
+		  {% if posts %}
+		    {% for post in posts %}
+		    <div class="well row">
+		    <div class="span7">
+		      <h3>
+		      <a class="span3 offset2" href="/wiki/{{ post.page.url }}/{{ post.id }}">{{ post.page.url.capitalize() }}</a></h3>
+		      {{ post.pub_date.strftime("%A, %d %B %Y") }}
+		      <div class="span7">
+		      	<hr class="break">
+		      	<div class="wiki_text">
+		      		{{ post.text|convert_links|safe }}
+		      	</div>
+		      	{% if post.tags %}
+		      	<hr class="light-break">
+		      	<div class="tags">Tags:
+		      	{% for tag in post.tags %}
+		      	  <a href="/tags/{{ tag.tag }}">{{ tag.tag }}</a>
+		      	{% endfor %}
+		      	</div>
+		      	{% endif %}
+		      </div>
+		    </div>
+			</div>
+			{% endfor %}
+		  {% endif %}
+{% endblock %}
